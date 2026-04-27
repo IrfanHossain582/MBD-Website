@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MBD — Make. Build. Deliver. | Premium Freelance Studio</title>
+<meta name="description" content="MBD is a premium freelance collective shipping design, code, ML, SaaS, SEO and automation work for ambitious teams. Vetted humans. Trackable projects. Fixed-price quotes." />
+<meta name="keywords" content="freelance marketplace, hire designers, hire developers, UI UX design, machine learning, SaaS development, SQA testing, SEO, digital marketing, automation, mobile app, full stack" />
+<meta name="author" content="MBD Studio" />
+<meta property="og:title" content="MBD — Make. Build. Deliver." />
+<meta property="og:description" content="Premium freelance collective. Design. Code. Ship." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================
+   MBD DESIGN SYSTEM
+   =========================================== */
+:root {
+  --bg: #0a0a14;
+  --bg-2: #0f0f1c;
+  --bg-3: #14142a;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.09);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #f5f5f0;
+  --text-dim: #a4a4ad;
+  --text-mute: #6a6a73;
+  --lime: #c4f250;
+  --lime-soft: #d4f580;
+  --coral: #ff7a6b;
+  --violet: #a78bfa;
+  --amber: #f4b740;
+  --teal: #5eead4;
+
+  --font-display: 'Instrument Serif', 'Times New Roman', serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow: 0 12px 40px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-lg: 0 30px 80px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.06) inset;
+  --shadow-glow: 0 0 60px rgba(196, 242, 80, 0.18);
+  --shadow-glow-coral: 0 0 60px rgba(255, 122, 107, 0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle grain overlay for premium feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Ambient gradient orbs — atmosphere */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient::before, .ambient::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.5;
+}
+.ambient::before {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(196,242,80,0.35), transparent 70%);
+  top: -200px; left: -100px;
+  animation: float 22s ease-in-out infinite;
+}
+.ambient::after {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,122,107,0.28), transparent 70%);
+  bottom: -250px; right: -150px;
+  animation: float 28s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(80px, -50px) scale(1.15); }
+}
+
+/* ===========================================
+   TYPOGRAPHY
+   =========================================== */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+}
+.italic { font-style: italic; }
+.mono { font-family: var(--font-mono); letter-spacing: -0.02em; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.eyebrow .dot {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--lime); border-radius: 50%;
+  margin-right: 10px; vertical-align: middle;
+  box-shadow: 0 0 10px var(--lime);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.9); }
+}
+
+/* ===========================================
+   LAYOUT
+   =========================================== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+.section { padding: 120px 0; position: relative; z-index: 2; }
+.section-sm { padding: 80px 0; position: relative; z-index: 2; }
+
+/* ===========================================
+   NAV
+   =========================================== */
+nav.topbar {
+  position: fixed;
+  top: 16px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 32px);
+  max-width: 1240px;
+  background: rgba(15, 15, 28, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 10px 14px 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--lime);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: #000;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 0 24px rgba(196,242,80,0.4);
+}
+.nav-links {
+  display: flex; gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--text); background: var(--surface-2); }
+.nav-cta { display: flex; gap: 8px; align-items: center; }
+
+/* ===========================================
+   BUTTONS
+   =========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--lime);
+  color: #0a0a14;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(196,242,80,0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(196,242,80,0.4);
+}
+.btn-ghost {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--surface-3); border-color: var(--border-strong); }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+.btn-outline:hover { background: var(--surface-2); }
+.btn-lg { padding: 16px 28px; font-size: 15px; }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn .arrow {
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* ===========================================
+   HERO
+   =========================================== */
+.hero {
+  padding: 160px 0 80px;
+  position: relative;
+  z-index: 2;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 60px;
+  align-items: end;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 11vw, 168px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+.hero h1 .accent { color: var(--lime); font-style: italic; }
+.hero h1 .strike { font-style: italic; color: var(--text-dim); }
+.hero-sub {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+  align-items: end;
+}
+.hero-sub p {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  max-width: 540px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.hero-meta {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.meta-item .num {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.meta-item .num small { font-size: 24px; color: var(--lime); }
+.meta-item .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+}
+
+/* ===========================================
+   MARQUEE
+   =========================================== */
+.marquee {
+  margin: 60px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent, rgba(196,242,80,0.025), transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: scroll 50s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.marquee-item .star {
+  color: var(--lime);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 22px;
+}
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===========================================
+   SECTION HEADERS
+   =========================================== */
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 64px;
+  align-items: end;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+.section-head h2 .it { font-style: italic; color: var(--lime); }
+.section-head .sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  max-width: 480px;
+}
+
+/* ===========================================
+   SERVICES GRID
+   =========================================== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(196,242,80,0.12), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
+}
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 44px; height: 44px;
+  background: var(--surface-3);
+  border-radius: 12px;
+  display: grid; place-items: center;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  font-size: 20px;
+}
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.service-card h3 .it { font-style: italic; color: var(--lime); }
+.service-card p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+.service-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.service-price {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text);
+}
+.service-price small { color: var(--text-mute); font-size: 11px; }
+.service-arrow {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  display: grid; place-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+}
+.service-card:hover .service-arrow {
+  background: var(--lime);
+  color: #000;
+  transform: rotate(-45deg);
+}
+
+/* ===========================================
+   ABOUT
+   =========================================== */
+.about {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+.about-text h2 .it { font-style: italic; color: var(--lime); }
+.about-text p {
+  font-size: 17px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.feat-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+.feat-row:hover { background: var(--surface-2); border-color: var(--border-strong); transform: translateX(4px); }
+.feat-num {
+  font-family: var(--font-mono);
+  color: var(--lime);
+  font-size: 12px;
+  margin-top: 3px;
+}
+.feat-row strong { display: block; margin-bottom: 4px; font-weight: 500; }
+.feat-row span { color: var(--text-dim); font-size: 14px; }
+
+/* ===========================================
+   TEAM
+   =========================================== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.team-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+.team-card:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: var(--shadow-lg); }
+.team-photo {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--bg-3), var(--bg-2));
+  position: relative;
+  overflow: hidden;
+}
+.team-photo svg { width: 100%; height: 100%; }
+.team-info { padding: 20px; }
+.team-info .name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.team-info .role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.team-tag {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: rgba(10,10,20,0.7);
+  backdrop-filter: blur(12px);
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--lime);
+  border: 1px solid rgba(196,242,80,0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===========================================
+   PROCESS
+   =========================================== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.process-step {
+  padding: 40px 28px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s ease;
+}
+.process-step:last-child { border-right: none; }
+.process-step:hover { background: var(--surface); }
+.process-step .num {
+  font-family: var(--font-mono);
+  color: var(--lime);
+  font-size: 12px;
+  margin-bottom: 32px;
+}
+.process-step h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.process-step p { color: var(--text-dim); font-size: 14px; }
+
+/* ===========================================
+   TESTIMONIALS
+   =========================================== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.testimonial {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  transition: all 0.3s ease;
+}
+.testimonial:hover { background: var(--surface-2); transform: translateY(-3px); }
+.testimonial .stars {
+  color: var(--lime);
+  font-family: var(--font-mono);
+  margin-bottom: 20px;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.testimonial .quote {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin-bottom: 28px;
+}
+.testimonial .quote-mark {
+  font-style: italic;
+  color: var(--lime);
+}
+.testimonial-author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.author-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--lime);
+  border: 1px solid var(--border);
+}
+.author-info .author-name { font-weight: 500; font-size: 14px; }
+.author-info .author-co { color: var(--text-dim); font-size: 12px; }
+
+/* ===========================================
+   PRICING / PACKAGE
+   =========================================== */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.price-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  transition: all 0.3s ease;
+}
+.price-card.featured {
+  background: linear-gradient(180deg, rgba(196,242,80,0.06), var(--surface));
+  border-color: rgba(196,242,80,0.25);
+  box-shadow: var(--shadow-glow);
+}
+.price-card .badge {
+  position: absolute;
+  top: -10px; left: 32px;
+  background: var(--lime);
+  color: #0a0a14;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.price-card .tier {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+}
+.price-card .price {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 12px;
+}
+.price-card .price small {
+  font-family: var(--font-body);
+  font-size: 14px; color: var(--text-dim);
+  font-weight: 400;
+}
+.price-card .desc {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+.price-card ul {
+  list-style: none;
+  margin-bottom: 32px;
+}
+.price-card li {
+  font-size: 14px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 10px; align-items: center;
+}
+.price-card li::before {
+  content: '→';
+  color: var(--lime);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.price-card .btn { width: 100%; justify-content: center; }
+
+/* ===========================================
+   CALENDAR & CONTACT
+   =========================================== */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  backdrop-filter: blur(20px);
+}
+.calendar {
+  user-select: none;
+}
+.cal-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+}
+.cal-head h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+.cal-nav { display: flex; gap: 4px; }
+.cal-nav button {
+  width: 32px; height: 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.2s ease;
+}
+.cal-nav button:hover { background: var(--surface-3); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-day-name {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mute);
+  padding: 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+}
+.cal-day:not(.empty):not(.disabled):hover { background: var(--surface-2); }
+.cal-day.empty { cursor: default; }
+.cal-day.disabled { color: var(--text-mute); cursor: not-allowed; opacity: 0.4; }
+.cal-day.today { color: var(--lime); font-weight: 600; }
+.cal-day.selected { background: var(--lime); color: #0a0a14; font-weight: 600; }
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 24px;
+}
+.time-slot {
+  padding: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.time-slot:hover { background: var(--surface-3); border-color: var(--border-strong); }
+.time-slot.active { background: var(--lime); color: #0a0a14; border-color: var(--lime); }
+
+/* ===========================================
+   FORM
+   =========================================== */
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 8px;
+}
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--lime);
+  background: var(--surface-3);
+  box-shadow: 0 0 0 4px rgba(196,242,80,0.1);
+}
+.form-textarea { resize: vertical; min-height: 120px; font-family: var(--font-body); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ===========================================
+   FOOTER
+   =========================================== */
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 80px 0 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 80px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-brand h4 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.footer-brand h4 .it { font-style: italic; color: var(--lime); }
+.footer-brand p { color: var(--text-dim); font-size: 14px; max-width: 320px; }
+.footer-col h5 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-mute);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+.footer-col a:hover { color: var(--lime); }
+.footer-bot {
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-mute);
+}
+.footer-bot .pay {
+  display: flex; gap: 10px; align-items: center;
+}
+.pay-badge {
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.giant-mbd {
+  font-family: var(--font-display);
+  font-size: clamp(140px, 28vw, 400px);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  margin: 80px 0 0;
+  background: linear-gradient(180deg, var(--text) 0%, transparent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-style: italic;
+  opacity: 0.18;
+}
+
+/* ===========================================
+   MODAL
+   =========================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 12, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal {
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-overlay.active .modal { transform: scale(1); }
+.modal.wide { max-width: 720px; }
+.modal.xwide { max-width: 960px; }
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+.modal-close:hover { background: var(--surface-3); transform: rotate(90deg); }
+.modal h3 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.modal h3 .it { font-style: italic; color: var(--lime); }
+.modal .modal-sub {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+.tab-switch {
+  display: flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+.tab-switch button {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.tab-switch button.active {
+  background: var(--lime);
+  color: #0a0a14;
+}
+
+/* ===========================================
+   CHATBOT
+   =========================================== */
+.chat-toggle {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0a0a14;
+  border: none;
+  cursor: pointer;
+  z-index: 90;
+  box-shadow: var(--shadow-glow), 0 12px 30px rgba(0,0,0,0.4);
+  display: grid; place-items: center;
+  transition: all 0.3s ease;
+}
+.chat-toggle:hover { transform: scale(1.08); }
+.chat-toggle .pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--lime);
+  animation: pulseRing 2s ease-out infinite;
+}
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.chat-window {
+  position: fixed;
+  bottom: 100px; right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  height: 540px;
+  max-height: calc(100vh - 140px);
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 91;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.chat-window.open {
+  display: flex;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.chat-head {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(196,242,80,0.05), transparent);
+}
+.chat-head .avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0a0a14;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  position: relative;
+}
+.chat-head .avatar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 12px; height: 12px;
+  background: #4ade80;
+  border-radius: 50%;
+  border: 2px solid var(--bg-2);
+}
+.chat-head .name { font-weight: 500; font-size: 15px; }
+.chat-head .status { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+.chat-head .status::before { content: ''; width: 6px; height: 6px; background: #4ade80; border-radius: 50%; }
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chat-msg {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: msgIn 0.3s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.chat-msg.bot {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+}
+.chat-msg.user {
+  background: var(--lime);
+  color: #0a0a14;
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+}
+.chat-quick {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 0 20px 12px;
+}
+.chat-quick button {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+.chat-quick button:hover { background: var(--surface-3); border-color: var(--lime); }
+.chat-input {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+.chat-input input:focus { outline: none; border-color: var(--lime); }
+.chat-input button {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0a0a14;
+  border: none;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: all 0.2s ease;
+}
+.chat-input button:hover { transform: scale(1.05); }
+
+/* ===========================================
+   DASHBOARD
+   =========================================== */
+.dash-shell { padding: 100px 0 60px; min-height: 100vh; }
+.dash-head {
+  display: flex; justify-content: space-between; align-items: end;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.dash-head h2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.dash-head h2 .it { font-style: italic; color: var(--lime); }
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  backdrop-filter: blur(20px);
+}
+.stat-card .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+.stat-card .val {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1;
+}
+.stat-card .delta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--lime);
+  margin-top: 8px;
+}
+.dash-projects {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+.dash-table-head {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.dash-table-head h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+.proj-row {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  gap: 24px;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+.proj-row:hover { background: var(--surface-2); }
+.proj-row:last-child { border-bottom: none; }
+.proj-name { font-weight: 500; font-size: 15px; }
+.proj-name small { display: block; color: var(--text-dim); font-size: 12px; font-family: var(--font-mono); margin-top: 3px; }
+.proj-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+.proj-meta strong { color: var(--text); display: block; font-weight: 400; font-size: 13px; margin-bottom: 3px; }
+.proj-progress {
+  height: 8px;
+  background: var(--surface-3);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.proj-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--lime), var(--lime-soft));
+  border-radius: 100px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 12px rgba(196,242,80,0.3);
+}
+.proj-progress-fill.coral { background: linear-gradient(90deg, var(--coral), #ffaa9c); box-shadow: 0 0 12px rgba(255,122,107,0.3); }
+.proj-progress-fill.amber { background: linear-gradient(90deg, var(--amber), #ffd57a); box-shadow: 0 0 12px rgba(244,183,64,0.3); }
+.proj-status {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+.proj-status.active { background: rgba(196,242,80,0.12); color: var(--lime); border: 1px solid rgba(196,242,80,0.25); }
+.proj-status.review { background: rgba(244,183,64,0.12); color: var(--amber); border: 1px solid rgba(244,183,64,0.25); }
+.proj-status.done { background: rgba(94,234,212,0.12); color: var(--teal); border: 1px solid rgba(94,234,212,0.25); }
+.proj-status.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* ===========================================
+   PAYMENT
+   =========================================== */
+.pay-method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.pay-method {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pay-method:hover { border-color: var(--border-strong); }
+.pay-method.selected {
+  border-color: var(--lime);
+  background: rgba(196,242,80,0.06);
+}
+.pay-method .pm-icon {
+  width: 40px; height: 28px;
+  background: white;
+  border-radius: 6px;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #000;
+  font-weight: 700;
+}
+.pay-method .pm-name { font-size: 14px; font-weight: 500; }
+.pay-method .pm-desc { font-size: 11px; color: var(--text-dim); font-family: var(--font-mono); }
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+@media (max-width: 1024px) {
+  .services-grid, .testimonials-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-step:nth-child(2) { border-right: none; }
+  .process-step:nth-child(1), .process-step:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .about, .contact-wrap, .hero-sub { grid-template-columns: 1fr; gap: 32px; }
+  .section-head { grid-template-columns: 1fr; gap: 20px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .hero-actions { justify-content: flex-start; }
+  .dash-stats { grid-template-columns: repeat(2, 1fr); }
+  .proj-row { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .section { padding: 80px 0; }
+  .nav-links { display: none; }
+  nav.topbar { padding: 8px 8px 8px 16px; }
+  .services-grid, .testimonials-grid, .pricing-grid, .team-grid, .process-grid { grid-template-columns: 1fr; }
+  .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .process-step:last-child { border-bottom: none; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-meta { grid-template-columns: 1fr 1fr; }
+  .modal { padding: 28px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .dash-stats { grid-template-columns: 1fr; }
+  .pay-method-grid { grid-template-columns: 1fr; }
+}
+
+/* ===========================================
+   REVEAL ON SCROLL
+   =========================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  padding: 12px 20px;
+  font-size: 14px;
+  z-index: 300;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  display: flex; align-items: center; gap: 10px;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast .check {
+  width: 20px; height: 20px;
+  background: var(--lime);
+  color: #0a0a14;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<!-- =====================================================
+     NAV
+====================================================== -->
+<nav class="topbar">
+  <div class="logo" onclick="goTo('home')">
+    <div class="logo-mark">M</div>
+    <span>mbd<i style="color:var(--lime)">.</i></span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goTo('home')">Home</a></li>
+    <li><a onclick="scrollToId('services')">Services</a></li>
+    <li><a onclick="scrollToId('about')">About</a></li>
+    <li><a onclick="scrollToId('team')">Team</a></li>
+    <li><a onclick="scrollToId('testimonials')">Stories</a></li>
+    <li><a onclick="scrollToId('contact')">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn btn-ghost btn-sm" id="navAuthBtn" onclick="openAuth()">Sign in</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuth('signup')">Start a project <span class="arrow">→</span></button>
+  </div>
+</nav>
+
+<!-- =====================================================
+     HOME PAGE
+====================================================== -->
+<div id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow reveal"><span class="dot"></span>Premium freelance collective · est. 2021</div>
+      <div class="hero-grid">
+        <h1 class="reveal" style="margin-top: 28px;">
+          We don't sell hours.<br>
+          We <span class="accent">ship</span> the<br>
+          work that <span class="strike">moves</span><br>
+          your business.
+        </h1>
+      </div>
+      <div class="hero-sub">
+        <p class="reveal">
+          MBD is a vetted collective of designers, engineers, ML researchers and growth specialists.
+          Pick a service, get a fixed quote, track your project from kickoff to delivery — without
+          the agency markup or the freelance roulette.
+        </p>
+        <div class="hero-actions reveal">
+          <button class="btn btn-primary btn-lg" onclick="scrollToId('services')">Explore services <span class="arrow">→</span></button>
+          <button class="btn btn-outline btn-lg" onclick="scrollToId('contact')">Book a call</button>
+        </div>
+      </div>
+      <div class="hero-meta reveal">
+        <div class="meta-item"><div class="num">312<small>+</small></div><div class="lbl">Projects shipped</div></div>
+        <div class="meta-item"><div class="num">48<small>h</small></div><div class="lbl">Avg. first response</div></div>
+        <div class="meta-item"><div class="num">96<small>%</small></div><div class="lbl">Client retention</div></div>
+        <div class="meta-item"><div class="num">22</div><div class="lbl">Specialists on call</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">Graphic Design <span class="star">✦</span></span>
+      <span class="marquee-item">UI / UX Design <span class="star">✦</span></span>
+      <span class="marquee-item">Vibe Coding <span class="star">✦</span></span>
+      <span class="marquee-item">SQA & Testing <span class="star">✦</span></span>
+      <span class="marquee-item">ML Research Papers <span class="star">✦</span></span>
+      <span class="marquee-item">Model Development <span class="star">✦</span></span>
+      <span class="marquee-item">SaaS Products <span class="star">✦</span></span>
+      <span class="marquee-item">Mobile Apps <span class="star">✦</span></span>
+      <span class="marquee-item">Full Stack <span class="star">✦</span></span>
+      <span class="marquee-item">SEO <span class="star">✦</span></span>
+      <span class="marquee-item">Digital Marketing <span class="star">✦</span></span>
+      <span class="marquee-item">Automation <span class="star">✦</span></span>
+      <!-- duplicated for seamless loop -->
+      <span class="marquee-item">Graphic Design <span class="star">✦</span></span>
+      <span class="marquee-item">UI / UX Design <span class="star">✦</span></span>
+      <span class="marquee-item">Vibe Coding <span class="star">✦</span></span>
+      <span class="marquee-item">SQA & Testing <span class="star">✦</span></span>
+      <span class="marquee-item">ML Research Papers <span class="star">✦</span></span>
+      <span class="marquee-item">Model Development <span class="star">✦</span></span>
+      <span class="marquee-item">SaaS Products <span class="star">✦</span></span>
+      <span class="marquee-item">Mobile Apps <span class="star">✦</span></span>
+      <span class="marquee-item">Full Stack <span class="star">✦</span></span>
+      <span class="marquee-item">SEO <span class="star">✦</span></span>
+      <span class="marquee-item">Digital Marketing <span class="star">✦</span></span>
+      <span class="marquee-item">Automation <span class="star">✦</span></span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>What we make</div>
+          <h2>Thirteen services. <span class="it">One studio.</span></h2>
+        </div>
+        <p class="sub">
+          Pick a service or stitch a few together. Every engagement starts with a fixed-price quote and a kickoff call,
+          so you know exactly what you're getting before you pay a cent.
+        </p>
+      </div>
+      <div class="services-grid" id="serviceGrid"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about reveal">
+        <div class="about-text">
+          <div class="eyebrow" style="margin-bottom:24px;"><span class="dot"></span>About MBD</div>
+          <h2>Made by people who'd rather <span class="it">build</span> than bill.</h2>
+          <p>
+            MBD started in 2021 with a stubborn idea: most freelance platforms reward whoever bids fastest,
+            not whoever ships best. So we flipped it. Every person you work with at MBD has been peer-reviewed
+            by other specialists in their craft — designers vet designers, engineers vet engineers, researchers
+            vet researchers.
+          </p>
+          <p>
+            That's why we don't sell time. We sell outcomes. A landing page that converts. A model that learns.
+            An app that doesn't crash on launch day. Track every milestone live in your dashboard, talk to your
+            team in real time, pay only when each phase ships.
+          </p>
+          <div class="about-features">
+            <div class="feat-row"><div class="feat-num">01</div><div><strong>Vetted, not crowdsourced.</strong><span>Every specialist is reviewed by their peers before joining the collective.</span></div></div>
+            <div class="feat-row"><div class="feat-num">02</div><div><strong>Fixed-price, fixed-scope.</strong><span>You'll know the number before you sign. No padded hours, no surprise invoices.</span></div></div>
+            <div class="feat-row"><div class="feat-num">03</div><div><strong>Live project tracking.</strong><span>Watch progress update in real time. Your client dashboard is always honest.</span></div></div>
+            <div class="feat-row"><div class="feat-num">04</div><div><strong>Pay how you want.</strong><span>Visa, Mastercard, PayPal, Payoneer — split into milestones, not lump sums.</span></div></div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; backdrop-filter: blur(20px);">
+            <div class="eyebrow" style="margin-bottom: 20px;"><span class="dot"></span>Live signal</div>
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <div style="padding-bottom:20px; border-bottom:1px solid var(--border)">
+                <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-mute); margin-bottom:8px; text-transform:uppercase; letter-spacing:.12em;">Online specialists</div>
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:var(--font-display); font-size:48px; line-height:1;">14</span>
+                  <span style="font-family:var(--font-mono); font-size:13px; color:var(--lime);">● live now</span>
+                </div>
+              </div>
+              <div style="padding-bottom:20px; border-bottom:1px solid var(--border)">
+                <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-mute); margin-bottom:8px; text-transform:uppercase; letter-spacing:.12em;">Active projects</div>
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:var(--font-display); font-size:48px; line-height:1;">37</span>
+                  <span style="font-family:var(--font-mono); font-size:13px; color:var(--text-dim);">across 9 timezones</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-mute); margin-bottom:8px; text-transform:uppercase; letter-spacing:.12em;">Avg. response time</div>
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:var(--font-display); font-size:48px; line-height:1;">11<span style="font-size:24px;">m</span></span>
+                  <span style="font-family:var(--font-mono); font-size:13px; color:var(--coral);">↓ 38% vs last quarter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg" style="margin-top:20px; width:100%; justify-content:center;" onclick="scrollToId('contact')">
+            Get a quote in 24h <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>How it works</div>
+          <h2>From hello to handover, <span class="it">in four moves.</span></h2>
+        </div>
+        <p class="sub">No proposals back-and-forth for a month. We move fast because the people you talk to are the people who do the work.</p>
+      </div>
+      <div class="process-grid reveal">
+        <div class="process-step">
+          <div class="num">01 / SCOPE</div>
+          <h3>Tell us what you want shipped.</h3>
+          <p>30-min call to nail down outcomes, not "deliverables." We'll tell you straight if we're not the right fit.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">02 / QUOTE</div>
+          <h3>Fixed price, fixed dates.</h3>
+          <p>You get a written scope, milestones, and a number — usually within 24 hours of the discovery call.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">03 / BUILD</div>
+          <h3>Track everything, live.</h3>
+          <p>Your dashboard shows progress, files, and the team. Pay per milestone as work ships, not before.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">04 / SHIP</div>
+          <h3>Handover, with a 30-day warranty.</h3>
+          <p>Source files, docs, training. Something breaks in the first month? We fix it on us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>The collective</div>
+          <h2>Real humans. <span class="it">Not lookalike avatars.</span></h2>
+        </div>
+        <p class="sub">A snapshot of the core team. Twenty-two specialists rotate in based on what your project needs.</p>
+      </div>
+      <div class="team-grid reveal" id="teamGrid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>Stories from the inbox</div>
+          <h2>Founders, PMs and indie hackers <span class="it">who came back.</span></h2>
+        </div>
+        <p class="sub">We don't ask for testimonials. These showed up unprompted in Slack, Loom and email. Names changed only where requested.</p>
+      </div>
+      <div class="testimonials-grid reveal" id="testimonialGrid"></div>
+    </div>
+  </section>
+
+  <!-- PRICING / PACKAGES -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>Engagement models</div>
+          <h2>Three ways to <span class="it">work with us.</span></h2>
+        </div>
+        <p class="sub">Pick a single sprint, a monthly retainer for a continuous build, or a fully-managed end-to-end product launch.</p>
+      </div>
+      <div class="pricing-grid reveal">
+        <div class="price-card">
+          <div class="tier">Sprint</div>
+          <div class="price">$1,490<small>/ project</small></div>
+          <div class="desc">A single, scoped piece of work — landing page, brand identity, audit, prototype.</div>
+          <ul>
+            <li>One specialist, one outcome</li>
+            <li>2–3 week turnaround</li>
+            <li>Two revision rounds</li>
+            <li>Source files included</li>
+            <li>30-day warranty</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="openCheckout('Sprint package', 1490)">Start a sprint</button>
+        </div>
+        <div class="price-card featured">
+          <div class="badge">Most popular</div>
+          <div class="tier">Build</div>
+          <div class="price">$4,800<small>/ month</small></div>
+          <div class="desc">A continuous engagement for products under active development. Add or swap specialists as needs change.</div>
+          <ul>
+            <li>Up to 3 specialists rotating</li>
+            <li>Weekly milestones, live tracking</li>
+            <li>Priority Slack & response SLA</li>
+            <li>Quarterly strategy review</li>
+            <li>Cancel anytime, 30-day notice</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openCheckout('Build retainer', 4800)">Start building</button>
+        </div>
+        <div class="price-card">
+          <div class="tier">Studio</div>
+          <div class="price">Custom<small>/ launch</small></div>
+          <div class="desc">End-to-end product launch — research, design, build, ship and growth handover. Fully managed.</div>
+          <ul>
+            <li>Dedicated team of 4–6</li>
+            <li>3–9 month engagement</li>
+            <li>Includes ML / AI track if needed</li>
+            <li>Co-investment available</li>
+            <li>90-day post-launch support</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="scrollToId('contact')">Talk to us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT + CALENDAR -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px;"><span class="dot"></span>Start the conversation</div>
+          <h2>Book a call or <span class="it">send a brief.</span></h2>
+        </div>
+        <p class="sub">We respond inside 11 minutes during working hours (Mon–Fri, 09:00–22:00 GMT+6). For anything urgent, ping the chat.</p>
+      </div>
+      <div class="contact-wrap reveal">
+        <div class="glass-card calendar">
+          <div class="cal-head">
+            <h3 id="calMonth">Loading…</h3>
+            <div class="cal-nav">
+              <button onclick="changeMonth(-1)">‹</button>
+              <button onclick="changeMonth(1)">›</button>
+            </div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div style="margin-top: 28px;">
+            <div class="eyebrow" style="margin-bottom:14px;"><span class="dot"></span>Available time slots <span id="selectedDateLabel" style="color:var(--text); margin-left:6px; text-transform:none; letter-spacing:0; font-family:var(--font-mono);"></span></div>
+            <div class="time-slots" id="timeSlots"></div>
+          </div>
+          <button class="btn btn-primary" id="bookSlotBtn" style="margin-top:24px; width:100%; justify-content:center;" onclick="bookAppointment()">
+            Book this slot <span class="arrow">→</span>
+          </button>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-family:var(--font-display); font-size:32px; line-height:1; margin-bottom:8px;">Or write us a note.</h3>
+          <p style="color:var(--text-dim); font-size:14px; margin-bottom:24px;">A few sentences is enough. We'll come back with questions.</p>
+          <div class="form-row">
+            <div class="form-group"><label>Your name</label><input class="form-input" id="ctName" placeholder="Ayesha Khan" /></div>
+            <div class="form-group"><label>Email</label><input class="form-input" id="ctEmail" type="email" placeholder="you@company.com" /></div>
+          </div>
+          <div class="form-group">
+            <label>Service you need</label>
+            <select class="form-select" id="ctService"></select>
+          </div>
+          <div class="form-group">
+            <label>Tell us about it</label>
+            <textarea class="form-textarea" id="ctMessage" placeholder="What are you trying to build, what's the rough budget, when do you need it?"></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="sendContact()">Send message <span class="arrow">→</span></button>
+          <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:12px; font-size:13px;">
+            <div style="display:flex; align-items:center; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span><span>hello@mbd.studio</span></div>
+            <div style="display:flex; align-items:center; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span><span>+880 1700-000000 (Mon–Fri, 09:00–22:00 GMT+6)</span></div>
+            <div style="display:flex; align-items:center; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span><span>Bridge Tower, Gulshan-1, Dhaka, BD</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- =====================================================
+     CLIENT DASHBOARD PAGE
+====================================================== -->
+<div id="page-dashboard" style="display:none;">
+  <section class="dash-shell">
+    <div class="container">
+      <div class="dash-head">
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px;"><span class="dot"></span>Your dashboard</div>
+          <h2>Welcome back, <span class="it" id="dashUserName">friend</span>.</h2>
+        </div>
+        <button class="btn btn-ghost" onclick="goTo('home')">← Back to site</button>
+      </div>
+      <div class="dash-stats">
+        <div class="stat-card"><div class="lbl">Active projects</div><div class="val" id="statActive">3</div><div class="delta">● Live now</div></div>
+        <div class="stat-card"><div class="lbl">In review</div><div class="val" id="statReview">1</div><div class="delta">→ Action needed</div></div>
+        <div class="stat-card"><div class="lbl">Completed</div><div class="val" id="statDone">8</div><div class="delta">↑ Avg 11d delivery</div></div>
+        <div class="stat-card"><div class="lbl">Total invested</div><div class="val mono" style="font-family:var(--font-display);">$24.6k</div><div class="delta">→ ROI tracked</div></div>
+      </div>
+      <div class="dash-projects">
+        <div class="dash-table-head">
+          <h3>Project tracking</h3>
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);" id="dashUpdatedTime">Updated · live</span>
+        </div>
+        <div id="projectsList"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     ADMIN PAGE
+====================================================== -->
+<div id="page-admin" style="display:none;">
+  <section class="dash-shell">
+    <div class="container">
+      <div class="dash-head">
+        <div>
+          <div class="eyebrow" style="margin-bottom:14px;"><span class="dot"></span>Admin · MBD ops</div>
+          <h2>Project <span class="it">control room.</span></h2>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" onclick="openAdminAdd()">+ Add project</button>
+          <button class="btn btn-ghost" onclick="goTo('home')">← Exit</button>
+        </div>
+      </div>
+      <div class="dash-stats">
+        <div class="stat-card"><div class="lbl">Total clients</div><div class="val">42</div><div class="delta">↑ 6 this month</div></div>
+        <div class="stat-card"><div class="lbl">Active projects</div><div class="val" id="adminStatActive">—</div><div class="delta">● Live</div></div>
+        <div class="stat-card"><div class="lbl">Revenue · Q2</div><div class="val" style="font-family:var(--font-display);">$184k</div><div class="delta">↑ 22% vs Q1</div></div>
+        <div class="stat-card"><div class="lbl">Open contact threads</div><div class="val" id="adminStatThreads">5</div><div class="delta">→ 3 awaiting reply</div></div>
+      </div>
+      <div class="dash-projects">
+        <div class="dash-table-head">
+          <h3>All projects</h3>
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">Click row to update progress</span>
+        </div>
+        <div id="adminProjectsList"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     FOOTER (only on home page)
+====================================================== -->
+<footer id="siteFooter">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>Make. Build.<br><span class="it">Deliver.</span></h4>
+        <p>A premium freelance collective for teams who'd rather ship something good than promise something great.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Studio</h5>
+        <ul>
+          <li><a onclick="scrollToId('about')">About MBD</a></li>
+          <li><a onclick="scrollToId('team')">The team</a></li>
+          <li><a onclick="scrollToId('testimonials')">Stories</a></li>
+          <li><a onclick="goTo('admin')">Admin</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a onclick="scrollToId('services')">UI / UX design</a></li>
+          <li><a onclick="scrollToId('services')">Full-stack dev</a></li>
+          <li><a onclick="scrollToId('services')">ML & AI</a></li>
+          <li><a onclick="scrollToId('services')">SEO & growth</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in</h5>
+        <ul>
+          <li><a onclick="scrollToId('contact')">Book a call</a></li>
+          <li><a onclick="openAuth('signup')">Start a project</a></li>
+          <li><a onclick="goTo('dashboard')">Client login</a></li>
+          <li><a onclick="openChat()">Chat with us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div>© 2026 MBD Studio · Built by humans in Dhaka, BD</div>
+      <div class="pay">
+        <span style="color:var(--text-mute); font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.1em;">Accepted</span>
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">Mastercard</span>
+        <span class="pay-badge">PayPal</span>
+        <span class="pay-badge">Payoneer</span>
+      </div>
+    </div>
+    <div class="giant-mbd">mbd.</div>
+  </div>
+</footer>
+
+<!-- =====================================================
+     CHATBOT
+====================================================== -->
+<button class="chat-toggle" onclick="openChat()" id="chatToggle">
+  <span class="pulse-ring"></span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-head">
+    <div class="avatar">M</div>
+    <div>
+      <div class="name">MBD Concierge</div>
+      <div class="status">Online · replies in seconds</div>
+    </div>
+    <button class="modal-close" style="position:static; margin-left:auto;" onclick="closeChat()">×</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="chatQuick">
+    <button onclick="quickReply('I need pricing')">I need pricing</button>
+    <button onclick="quickReply('Talk to a human')">Talk to a human</button>
+    <button onclick="quickReply('Track my project')">Track my project</button>
+    <button onclick="quickReply('Tell me about the team')">About the team</button>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInputBox" placeholder="Type a message…" onkeypress="if(event.key==='Enter') sendChatMessage()" />
+    <button onclick="sendChatMessage()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- =====================================================
+     AUTH MODAL
+====================================================== -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this) closeModal('authModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('authModal')">×</button>
+    <h3 id="authTitle">Welcome <span class="it">back.</span></h3>
+    <p class="modal-sub" id="authSub">Sign in to track your projects, message your team and pay milestones.</p>
+    <div class="tab-switch">
+      <button class="active" id="tabSignin" onclick="switchAuth('signin')">Sign in</button>
+      <button id="tabSignup" onclick="switchAuth('signup')">Sign up</button>
+    </div>
+    <div id="signupOnly" style="display:none;">
+      <div class="form-group"><label>Full name</label><input class="form-input" id="auName" placeholder="Ayesha Khan" /></div>
+    </div>
+    <div class="form-group"><label>Email</label><input class="form-input" id="auEmail" type="email" placeholder="you@company.com" /></div>
+    <div class="form-group"><label>Password</label><input class="form-input" id="auPass" type="password" placeholder="••••••••" /></div>
+    <div id="signupOnly2" style="display:none;">
+      <div class="form-group">
+        <label>I'm here to</label>
+        <select class="form-select" id="auRole">
+          <option value="client">Hire specialists</option>
+          <option value="admin">Manage MBD (admin)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:10px;" onclick="doAuth()" id="authSubmit">Sign in <span class="arrow">→</span></button>
+    <p style="text-align:center; font-size:12px; color:var(--text-mute); margin-top:20px;">By continuing you agree to our Terms and Privacy. We never share your data.</p>
+  </div>
+</div>
+
+<!-- =====================================================
+     CHECKOUT MODAL
+====================================================== -->
+<div class="modal-overlay" id="checkoutModal" onclick="if(event.target===this) closeModal('checkoutModal')">
+  <div class="modal wide">
+    <button class="modal-close" onclick="closeModal('checkoutModal')">×</button>
+    <h3>Order <span class="it">summary.</span></h3>
+    <p class="modal-sub">Review the package, choose how you'd like to pay, and we'll set up your project workspace.</p>
+    <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:14px;">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.1em;">Selected</div>
+          <div style="font-family:var(--font-display); font-size:24px; margin-top:4px;" id="coItem">—</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:var(--font-display); font-size:32px; line-height:1;" id="coAmount">$0</div>
+          <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-top:4px;">First milestone · 25%</div>
+        </div>
+      </div>
+      <div style="padding-top:14px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:12px; color:var(--text-dim);">
+        <span>Pay today</span>
+        <span style="color:var(--lime);" id="coDeposit">$0</span>
+      </div>
+    </div>
+    <div class="eyebrow" style="margin-bottom:14px;"><span class="dot"></span>Choose payment method</div>
+    <div class="pay-method-grid" id="payMethods"></div>
+    <div id="cardFields">
+      <div class="form-group"><label>Card number</label><input class="form-input mono" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCard(this)"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Expiry</label><input class="form-input mono" placeholder="MM / YY" maxlength="7"></div>
+        <div class="form-group"><label>CVC</label><input class="form-input mono" placeholder="123" maxlength="4"></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;" onclick="processPayment()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s-8-4.5-8-11.8A5.2 5.2 0 0 1 12 5a5.2 5.2 0 0 1 8 5.2C20 17.5 12 22 12 22z"/></svg>
+      Pay <span id="coPayBtn">$0</span> securely
+    </button>
+    <p style="text-align:center; font-size:11px; color:var(--text-mute); margin-top:14px; font-family:var(--font-mono);">256-bit SSL · PCI-DSS · Refundable within 7 days</p>
+  </div>
+</div>
+
+<!-- =====================================================
+     SERVICE DETAIL MODAL
+====================================================== -->
+<div class="modal-overlay" id="serviceModal" onclick="if(event.target===this) closeModal('serviceModal')">
+  <div class="modal wide">
+    <button class="modal-close" onclick="closeModal('serviceModal')">×</button>
+    <div id="serviceModalContent"></div>
+  </div>
+</div>
+
+<!-- =====================================================
+     ADMIN ADD/EDIT PROJECT MODAL
+====================================================== -->
+<div class="modal-overlay" id="adminModal" onclick="if(event.target===this) closeModal('adminModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('adminModal')">×</button>
+    <h3 id="adminModalTitle">Add <span class="it">project.</span></h3>
+    <p class="modal-sub">Fill in details. Updates push to the client dashboard in real time.</p>
+    <div class="form-group"><label>Project name</label><input class="form-input" id="apName" placeholder="Brand identity for Northwind"></div>
+    <div class="form-group"><label>Client name</label><input class="form-input" id="apClient" placeholder="Northwind Inc."></div>
+    <div class="form-row">
+      <div class="form-group"><label>Service</label>
+        <select class="form-select" id="apService"></select>
+      </div>
+      <div class="form-group"><label>Lead specialist</label><input class="form-input" id="apLead" placeholder="Tahmid R."></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Start date</label><input class="form-input" type="date" id="apStart"></div>
+      <div class="form-group"><label>Due date</label><input class="form-input" type="date" id="apDue"></div>
+    </div>
+    <div class="form-group">
+      <label>Progress · <span id="apProgressLbl" style="color:var(--lime); font-family:var(--font-mono);">0%</span></label>
+      <input type="range" min="0" max="100" value="0" id="apProgress" style="width:100%;" oninput="document.getElementById('apProgressLbl').textContent=this.value+'%'">
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select class="form-select" id="apStatus">
+        <option value="active">Active</option>
+        <option value="review">In review</option>
+        <option value="done">Completed</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="saveProject()">Save project</button>
+  </div>
+</div>
+
+<!-- =====================================================
+     APPOINTMENT CONFIRMATION MODAL
+====================================================== -->
+<div class="modal-overlay" id="apptModal" onclick="if(event.target===this) closeModal('apptModal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('apptModal')">×</button>
+    <div style="text-align:center; padding:8px 0 0;">
+      <div style="width:64px; height:64px; margin:0 auto 24px; background:var(--lime); color:#0a0a14; border-radius:50%; display:grid; place-items:center; font-size:30px; box-shadow: var(--shadow-glow);">✓</div>
+      <h3 style="text-align:center;">You're <span class="it">booked.</span></h3>
+      <p class="modal-sub" style="text-align:center;">A calendar invite is on the way to your inbox. We'll send a Meet link 30 minutes before.</p>
+    </div>
+    <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:20px;">
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom: 1px solid var(--border); font-family:var(--font-mono); font-size:13px;">
+        <span style="color:var(--text-dim);">Date</span><span id="confDate">—</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom: 1px solid var(--border); font-family:var(--font-mono); font-size:13px;">
+        <span style="color:var(--text-dim);">Time</span><span id="confTime">—</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; font-family:var(--font-mono); font-size:13px;">
+        <span style="color:var(--text-dim);">Duration</span><span>30 min</span>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="closeModal('apptModal')">Got it</button>
+  </div>
+</div>
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+<div class="toast" id="toast"><span class="check">✓</span><span id="toastMsg">Saved</span></div>
+
+<script>
+// ========================================================
+// MBD APPLICATION STATE
+// ========================================================
+const state = {
+  user: null,                  // {name, email, role}
+  selectedDate: null,
+  selectedTime: null,
+  calMonth: new Date(),
+  selectedPay: 'visa',
+  checkoutItem: null,
+  checkoutAmount: 0,
+  editingProjectId: null,
+  projects: [
+    { id: 1, name: 'Northwind brand refresh', client: 'Northwind Inc.', service: 'Graphic Design', lead: 'Tahmid R.', start: '2026-04-08', due: '2026-05-12', progress: 72, status: 'active' },
+    { id: 2, name: 'Internal SaaS dashboard', client: 'Volt Energy', service: 'Full Stack Development', lead: 'Maya S.', start: '2026-03-22', due: '2026-06-01', progress: 48, status: 'active' },
+    { id: 3, name: 'Recommendation model v2', client: 'Pulse Music', service: 'Machine Learning', lead: 'Dr. Anika F.', start: '2026-04-15', due: '2026-05-30', progress: 31, status: 'active' },
+    { id: 4, name: 'Mobile app UX audit', client: 'Bento Pay', service: 'UI/UX Design', lead: 'Sami K.', start: '2026-04-01', due: '2026-04-29', progress: 95, status: 'review' },
+    { id: 5, name: 'SEO migration to Next.js', client: 'Lattice HR', service: 'SEO & Growth', lead: 'Junayd H.', start: '2026-02-10', due: '2026-04-10', progress: 100, status: 'done' },
+    { id: 6, name: 'Onboarding email automation', client: 'Riverbed Co.', service: 'Automation', lead: 'Naila T.', start: '2026-01-15', due: '2026-03-01', progress: 100, status: 'done' }
+  ]
+};
+
+// ========================================================
+// SERVICES DATA
+// ========================================================
+const SERVICES = [
+  { id: 'graphic',   icon: '◆',  name: 'Graphic Design',           tag: 'Visual',     price: 'from $290',  unit: '/ asset',   blurb: 'Logos, posters, decks, brand kits, pitch visuals — anything that needs to look the part.', long: 'Identity systems, marketing collateral, social kits, editorial layouts. Source files in Figma, Illustrator and PNG/SVG bundles. Two revision rounds standard, more on request.' },
+  { id: 'uiux',      icon: '◐',  name: 'UI / UX Design',           tag: 'Product',    price: 'from $1,800',unit: '/ project', blurb: 'End-to-end product design — from research and wireframes to polished prototypes ready to hand to engineering.', long: 'User research, journey mapping, information architecture, hi-fi mockups, prototypes, design systems. Output as a Figma library with documented components.' },
+  { id: 'vibe',      icon: '◉',  name: 'Vibe Coding',              tag: 'Rapid',      price: 'from $750',  unit: '/ MVP',     blurb: 'Fast, intuition-led prototyping. We turn a Loom and a hunch into a working product in days, not months.', long: 'AI-assisted rapid prototyping. Great for testing ideas, internal tools, demo apps, hackathon-grade builds. We ship to a live URL with auth and a database connected.' },
+  { id: 'sqa',       icon: '◇',  name: 'SQA & Testing',            tag: 'Quality',    price: 'from $980',  unit: '/ cycle',   blurb: 'Manual + automated QA. Find the bugs before your users do, with proper regression suites and reports.', long: 'Test plans, exploratory testing, Cypress/Playwright automation, accessibility audits, performance testing. Comes with a written bug log and severity matrix.' },
+  { id: 'research',  icon: '✦',  name: 'Research Paper Writing',   tag: 'Academic',   price: 'from $1,400',unit: '/ paper',   blurb: 'Conference and journal-grade ML papers — literature review, methodology, experiments, write-up.', long: 'For PhD candidates and research teams. We help with literature surveys, experimental design, statistical analysis, LaTeX formatting and venue submission packaging. NeurIPS / ICML / CVPR-style.' },
+  { id: 'ml',        icon: '◈',  name: 'Model Development',        tag: 'AI',         price: 'from $3,200',unit: '/ model',   blurb: 'Custom ML models — recommenders, classifiers, fine-tuned LLMs, vision systems — trained on your data.', long: 'Data prep, model architecture, training loops, eval harness, deployment to your stack (HF, AWS, GCP). Includes monitoring and a retraining playbook.' },
+  { id: 'fullstack', icon: '◊',  name: 'Full Stack Development',   tag: 'Engineering',price: 'from $4,800',unit: '/ build',   blurb: 'TypeScript, Next.js, Node, Postgres, infra. We build the things you can\'t buy off the shelf.', long: 'Production web apps with proper auth, payments, observability and CI. We work in your repo, your conventions, your code review process.' },
+  { id: 'saas',      icon: '◀',  name: 'SaaS Product Build',       tag: 'Product',    price: 'from $14k',  unit: '/ MVP',     blurb: 'Zero-to-launch SaaS — design, build, billing, deploy. Six to twelve weeks to a paying customer.', long: 'Landing site, app, multi-tenant architecture, Stripe billing, transactional email, analytics. Goal is a real MVP that can sign up its first paying customer the day we hand it over.' },
+  { id: 'mobile',    icon: '▣',  name: 'Mobile App Development',   tag: 'Native',     price: 'from $6,400',unit: '/ app',     blurb: 'React Native and native (Swift, Kotlin). One codebase or two — whichever serves the product better.', long: 'iOS + Android apps with offline support, push notifications, in-app purchases, deep links. We submit to the stores and handle the first review pass.' },
+  { id: 'seo',       icon: '◯',  name: 'SEO',                      tag: 'Growth',     price: 'from $1,200',unit: '/ audit',   blurb: 'Technical audits, content strategy and link plans — SEO that respects how search actually works in 2026.', long: 'Crawl analysis, Core Web Vitals, structured data, content gap analysis, internal linking strategy. Monthly retainers available for ongoing optimization.' },
+  { id: 'marketing', icon: '◮',  name: 'Digital Marketing',        tag: 'Growth',     price: 'from $1,800',unit: '/ month',   blurb: 'Paid social, search and lifecycle. Ads that pay back, not vanity-metric campaigns.', long: 'Meta + Google + LinkedIn ads, email nurture flows, landing page optimization, attribution modeling. Honest reporting — we tell you when it\'s not working.' },
+  { id: 'urp',       icon: '◖',  name: 'URP Design',               tag: 'Niche',      price: 'from $890',  unit: '/ board',   blurb: 'Custom Unreal/Roblox theme park & RP server design — layouts, builds, scripting and mod packs.', long: 'For RP server creators: complete theme servers, custom UI, custom commands, character builds, and onboarding rooms. We deliver the source files and a deployment guide.' },
+  { id: 'auto',      icon: '◭',  name: 'Automation',               tag: 'Ops',        price: 'from $640',  unit: '/ flow',    blurb: 'Make, Zapier, n8n and custom scripts. Cut the manual work out of your team\'s day.', long: 'Process audit → flow design → build → handover. Common wins: lead routing, invoice automation, content publishing, internal alerts. We document every step.' }
+];
+
+// ========================================================
+// TEAM DATA — distinct accent colors per member, abstract avatars
+// ========================================================
+const TEAM = [
+  { name: 'Tahmid Rahman',     role: 'Brand Director',          tag: 'Lead',     bg: '#c4f250', accent: '#0a0a14' },
+  { name: 'Maya Singh',        role: 'Senior Engineer',         tag: 'Tech',     bg: '#ff7a6b', accent: '#0a0a14' },
+  { name: 'Dr. Anika Faiz',    role: 'ML Research Lead',        tag: 'Research', bg: '#a78bfa', accent: '#0a0a14' },
+  { name: 'Sami Khondoker',    role: 'Product Designer',        tag: 'Design',   bg: '#5eead4', accent: '#0a0a14' },
+  { name: 'Junayd Hassan',     role: 'Growth & SEO Strategist', tag: 'Growth',   bg: '#f4b740', accent: '#0a0a14' },
+  { name: 'Naila Tasnim',      role: 'Automation Engineer',     tag: 'Ops',      bg: '#fb923c', accent: '#0a0a14' },
+  { name: 'Rafiqul Islam',     role: 'Mobile Lead',             tag: 'Mobile',   bg: '#67e8f9', accent: '#0a0a14' },
+  { name: 'Lina Park',         role: 'QA & SQA Architect',      tag: 'Quality',  bg: '#e879f9', accent: '#0a0a14' }
+];
+
+// ========================================================
+// TESTIMONIALS DATA
+// ========================================================
+const TESTIMONIALS = [
+  { rating: 5, quote: 'We brought MBD in for a "small audit." Six months later they\'ve rebuilt our checkout, our onboarding and our growth stack. The dashboard is what sold me — every milestone, every dollar, visible.', author: 'Mariam A.', role: 'COO, Bento Pay' },
+  { rating: 5, quote: 'Best ML team I\'ve worked with outside FAANG. They asked the questions our last vendor never thought to ask, then delivered a model that actually beats baseline by 11 points. Paper coming.', author: 'Dr. R. Mendes', role: 'Head of AI, Pulse' },
+  { rating: 5, quote: 'I\'ve hired off Upwork, Toptal, and three boutique agencies. MBD is the only team where the person on the discovery call was the same person who shipped my app. That changes everything.', author: 'Joon-ho Lim', role: 'Founder, Stack & Co.' },
+  { rating: 5, quote: 'They told me my original idea wouldn\'t work, on the first call. Cost them the project for two weeks while I sulked. Then I came back, we rescoped, and we shipped a much better product. Honest people.', author: 'P. Chowdhury', role: 'Indie founder' },
+  { rating: 5, quote: 'Fixed-price was the unlock. My CFO has stopped flinching every time I mention design. The team treats every dollar like their own, and the work shows it.', author: 'Inés D.', role: 'VP Marketing, Lattice HR' },
+  { rating: 5, quote: 'Our SEO migration was 11 weeks of detail. Their PM tracked every redirect, every schema change, every Core Web Vital. Organic traffic up 38% by month three. That\'s the work.', author: 'Tomás R.', role: 'Growth Lead, Volt' }
+];
+
+// ========================================================
+// PAYMENT METHODS
+// ========================================================
+const PAY_METHODS = [
+  { id: 'visa',     name: 'Visa',       desc: 'Debit or credit', icon: 'VISA' },
+  { id: 'master',   name: 'Mastercard', desc: 'Debit or credit', icon: 'MC' },
+  { id: 'paypal',   name: 'PayPal',     desc: 'Redirect',        icon: 'PP' },
+  { id: 'payoneer', name: 'Payoneer',   desc: 'Pay by invoice',  icon: 'PYR' }
+];
+
+// ========================================================
+// BOOT
+// ========================================================
+function boot() {
+  renderServices();
+  renderContactServiceSelect();
+  renderTeam();
+  renderTestimonials();
+  renderCalendar();
+  renderTimeSlots();
+  renderPayMethods();
+  renderProjects();
+  renderAdminProjects();
+  renderAdminServiceSelect();
+  initReveal();
+  initServiceCardHover();
+  initChat();
+}
+
+// ========================================================
+// NAVIGATION
+// ========================================================
+function goTo(page) {
+  ['home','dashboard','admin'].forEach(p => {
+    document.getElementById('page-' + p).style.display = (p === page) ? '' : 'none';
+  });
+  document.getElementById('siteFooter').style.display = (page === 'home') ? '' : 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function scrollToId(id) {
+  goTo('home');
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, 100);
+}
+
+// ========================================================
+// SERVICES RENDER
+// ========================================================
+function renderServices() {
+  const grid = document.getElementById('serviceGrid');
+  grid.innerHTML = SERVICES.map(s => `
+    <div class="service-card" onclick="openService('${s.id}')">
+      <div>
+        <div class="service-icon">${s.icon}</div>
+        <h3>${s.name}<span class="it"> ${s.tag === 'AI' ? 'ai.' : ''}</span></h3>
+        <p>${s.blurb}</p>
+      </div>
+      <div class="service-foot">
+        <div class="service-price">${s.price}<small> ${s.unit}</small></div>
+        <div class="service-arrow">→</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderContactServiceSelect() {
+  const sel = document.getElementById('ctService');
+  sel.innerHTML = '<option value="">Pick one (or describe below)</option>' +
+    SERVICES.map(s => `<option value="${s.id}">${s.name} — ${s.price}</option>`).join('');
+}
+function renderAdminServiceSelect() {
+  const sel = document.getElementById('apService');
+  sel.innerHTML = SERVICES.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+}
+
+function openService(id) {
+  const s = SERVICES.find(x => x.id === id);
+  if (!s) return;
+  const c = document.getElementById('serviceModalContent');
+  c.innerHTML = `
+    <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items:start;">
+      <div>
+        <div style="width:80px; height:80px; background:var(--surface-3); border:1px solid var(--border); border-radius:20px; display:grid; place-items:center; font-size:36px; margin-bottom:20px;">${s.icon}</div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-mute); text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px;">${s.tag}</div>
+        <h3 style="font-size:42px;">${s.name}</h3>
+        <div style="font-family:var(--font-display); font-size:32px; color:var(--lime); margin-top:14px; font-style:italic;">${s.price}<span style="font-family:var(--font-mono); font-size:14px; color:var(--text-dim); font-style:normal;"> ${s.unit}</span></div>
+      </div>
+      <div>
+        <p style="color:var(--text-dim); font-size:16px; line-height:1.6; margin-bottom:24px;">${s.long}</p>
+        <div class="eyebrow" style="margin-bottom:14px;"><span class="dot"></span>What's included</div>
+        <ul style="list-style:none; margin-bottom:28px;">
+          <li style="padding:10px 0; border-top:1px solid var(--border); font-size:14px; display:flex; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span>Discovery call & written scope</li>
+          <li style="padding:10px 0; border-top:1px solid var(--border); font-size:14px; display:flex; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span>Two revision rounds, more on request</li>
+          <li style="padding:10px 0; border-top:1px solid var(--border); font-size:14px; display:flex; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span>Source files, docs and a handover walkthrough</li>
+          <li style="padding:10px 0; border-top:1px solid var(--border); font-size:14px; display:flex; gap:10px;"><span style="color:var(--lime); font-family:var(--font-mono);">→</span>30-day post-delivery warranty</li>
+        </ul>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" style="flex:1; justify-content:center;" onclick="closeModal('serviceModal'); openCheckout('${s.name}', ${parseInt(s.price.replace(/[^\d]/g,'')) || 990})">Order this <span class="arrow">→</span></button>
+          <button class="btn btn-ghost" onclick="closeModal('serviceModal'); scrollToId('contact');">Ask first</button>
+        </div>
+      </div>
+    </div>`;
+  openModal('serviceModal');
+}
+
+// ========================================================
+// TEAM RENDER (abstract SVG portraits)
+// ========================================================
+function abstractPortrait(bg, accent, idx) {
+  // Generate a unique abstract geometric portrait per member
+  const variants = [
+    `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="250" fill="${bg}"/>
+      <circle cx="100" cy="95" r="40" fill="${accent}" opacity="0.92"/>
+      <path d="M50 250 Q100 160 150 250 Z" fill="${accent}" opacity="0.85"/>
+      <circle cx="85" cy="90" r="3" fill="${bg}"/>
+      <circle cx="115" cy="90" r="3" fill="${bg}"/>
+    </svg>`,
+    `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="250" fill="${bg}"/>
+      <ellipse cx="100" cy="100" rx="42" ry="48" fill="${accent}" opacity="0.9"/>
+      <rect x="40" y="170" width="120" height="80" rx="20" fill="${accent}" opacity="0.85"/>
+      <rect x="80" y="85" width="40" height="6" rx="3" fill="${bg}"/>
+    </svg>`,
+    `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="250" fill="${bg}"/>
+      <circle cx="100" cy="100" r="44" fill="${accent}" opacity="0.92"/>
+      <path d="M30 250 L60 180 L140 180 L170 250 Z" fill="${accent}" opacity="0.85"/>
+      <circle cx="82" cy="95" r="3.5" fill="${bg}"/>
+      <circle cx="118" cy="95" r="3.5" fill="${bg}"/>
+      <path d="M88 115 Q100 122 112 115" stroke="${bg}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>`,
+    `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="250" fill="${bg}"/>
+      <path d="M60 70 Q60 50 100 50 Q140 50 140 70 L140 130 Q140 150 100 150 Q60 150 60 130 Z" fill="${accent}" opacity="0.92"/>
+      <path d="M40 250 Q100 165 160 250 Z" fill="${accent}" opacity="0.85"/>
+      <circle cx="85" cy="95" r="3" fill="${bg}"/>
+      <circle cx="115" cy="95" r="3" fill="${bg}"/>
+    </svg>`
+  ];
+  return variants[idx % variants.length];
+}
+
+function renderTeam() {
+  const grid = document.getElementById('teamGrid');
+  grid.innerHTML = TEAM.map((m, i) => `
+    <div class="team-card">
+      <div class="team-photo">
+        ${abstractPortrait(m.bg, m.accent, i)}
+        <div class="team-tag">${m.tag}</div>
+      </div>
+      <div class="team-info">
+        <div class="name">${m.name}</div>
+        <div class="role">${m.role}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ========================================================
+// TESTIMONIALS
+// ========================================================
+function renderTestimonials() {
+  const grid = document.getElementById('testimonialGrid');
+  grid.innerHTML = TESTIMONIALS.map(t => `
+    <div class="testimonial">
+      <div class="stars">${'★'.repeat(t.rating)}</div>
+      <div class="quote"><span class="quote-mark">"</span>${t.quote}<span class="quote-mark">"</span></div>
+      <div class="testimonial-author">
+        <div class="author-avatar">${t.author.split(' ').map(x => x[0]).join('').slice(0,2)}</div>
+        <div class="author-info">
+          <div class="author-name">${t.author}</div>
+          <div class="author-co">${t.role}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ========================================================
+// CALENDAR
+// ========================================================
+function renderCalendar() {
+  const m = state.calMonth;
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calMonth').textContent = `${monthNames[m.getMonth()]} ${m.getFullYear()}`;
+  const grid = document.getElementById('calGrid');
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let html = dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+
+  const firstDay = new Date(m.getFullYear(), m.getMonth(), 1).getDay();
+  const lastDate = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day empty"></div>`;
+  for (let d = 1; d <= lastDate; d++) {
+    const dt = new Date(m.getFullYear(), m.getMonth(), d);
+    const isPast = dt < today;
+    const isToday = dt.getTime() === today.getTime();
+    const isSelected = state.selectedDate && state.selectedDate.getTime() === dt.getTime();
+    const isWeekend = dt.getDay() === 0 || dt.getDay() === 6;
+    const cls = ['cal-day'];
+    if (isPast || isWeekend) cls.push('disabled');
+    if (isToday) cls.push('today');
+    if (isSelected) cls.push('selected');
+    const action = (!isPast && !isWeekend) ? `onclick="selectDate(${m.getFullYear()},${m.getMonth()},${d})"` : '';
+    html += `<div class="${cls.join(' ')}" ${action}>${d}</div>`;
+  }
+  grid.innerHTML = html;
+}
+function selectDate(y, mo, d) {
+  state.selectedDate = new Date(y, mo, d);
+  state.selectedTime = null;
+  renderCalendar();
+  renderTimeSlots();
+  const lbl = document.getElementById('selectedDateLabel');
+  lbl.textContent = '· ' + state.selectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+function changeMonth(delta) {
+  const m = state.calMonth;
+  state.calMonth = new Date(m.getFullYear(), m.getMonth() + delta, 1);
+  renderCalendar();
+}
+function renderTimeSlots() {
+  const slots = ['09:00','10:00','11:30','14:00','15:30','17:00'];
+  document.getElementById('timeSlots').innerHTML = slots.map(s =>
+    `<div class="time-slot ${state.selectedTime===s?'active':''}" onclick="selectTime('${s}')">${s}</div>`
+  ).join('');
+}
+function selectTime(t) {
+  state.selectedTime = t;
+  renderTimeSlots();
+}
+function bookAppointment() {
+  if (!state.selectedDate) return showToast('Pick a date first');
+  if (!state.selectedTime) return showToast('Pick a time slot');
+  document.getElementById('confDate').textContent = state.selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  document.getElementById('confTime').textContent = state.selectedTime + ' GMT+6';
+  openModal('apptModal');
+}
+
+// ========================================================
+// CONTACT FORM
+// ========================================================
+function sendContact() {
+  const name = document.getElementById('ctName').value.trim();
+  const email = document.getElementById('ctEmail').value.trim();
+  const msg = document.getElementById('ctMessage').value.trim();
+  if (!name || !email || !msg) return showToast('Fill name, email and message');
+  showToast('Message sent — we\'ll reply in under 11 minutes');
+  document.getElementById('ctName').value = '';
+  document.getElementById('ctEmail').value = '';
+  document.getElementById('ctMessage').value = '';
+  document.getElementById('ctService').value = '';
+}
+
+// ========================================================
+// AUTH MODAL
+// ========================================================
+let authMode = 'signin';
+function openAuth(mode = 'signin') {
+  authMode = mode;
+  switchAuth(mode);
+  openModal('authModal');
+}
+function switchAuth(mode) {
+  authMode = mode;
+  const isSignup = mode === 'signup';
+  document.getElementById('tabSignin').classList.toggle('active', !isSignup);
+  document.getElementById('tabSignup').classList.toggle('active', isSignup);
+  document.getElementById('signupOnly').style.display = isSignup ? '' : 'none';
+  document.getElementById('signupOnly2').style.display = isSignup ? '' : 'none';
+  document.getElementById('authTitle').innerHTML = isSignup ? 'Create your <span class="it">space.</span>' : 'Welcome <span class="it">back.</span>';
+  document.getElementById('authSub').textContent = isSignup ? 'It takes 30 seconds. Then you can brief us, track projects and pay milestones.' : 'Sign in to track your projects, message your team and pay milestones.';
+  document.getElementById('authSubmit').innerHTML = (isSignup ? 'Create account' : 'Sign in') + ' <span class="arrow">→</span>';
+}
+function doAuth() {
+  const email = document.getElementById('auEmail').value.trim();
+  const pass = document.getElementById('auPass').value;
+  if (!email || !pass) return showToast('Email and password required');
+  const name = authMode === 'signup' ? document.getElementById('auName').value.trim() : email.split('@')[0];
+  if (authMode === 'signup' && !name) return showToast('Tell us your name');
+  const role = authMode === 'signup' ? document.getElementById('auRole').value : 'client';
+  state.user = { name, email, role };
+  document.getElementById('navAuthBtn').textContent = name.split(' ')[0];
+  document.getElementById('dashUserName').textContent = name.split(' ')[0];
+  closeModal('authModal');
+  showToast(authMode === 'signup' ? 'Welcome to MBD!' : 'Signed in');
+  setTimeout(() => goTo(role === 'admin' ? 'admin' : 'dashboard'), 400);
+}
+
+// ========================================================
+// CHECKOUT / PAYMENT
+// ========================================================
+function openCheckout(item, amount) {
+  if (!state.user) {
+    showToast('Sign in first to start an order');
+    openAuth('signup');
+    return;
+  }
+  state.checkoutItem = item;
+  state.checkoutAmount = amount;
+  document.getElementById('coItem').textContent = item;
+  document.getElementById('coAmount').textContent = '$' + amount.toLocaleString();
+  const deposit = Math.round(amount * 0.25);
+  document.getElementById('coDeposit').textContent = '$' + deposit.toLocaleString();
+  document.getElementById('coPayBtn').textContent = '$' + deposit.toLocaleString();
+  openModal('checkoutModal');
+}
+function renderPayMethods() {
+  document.getElementById('payMethods').innerHTML = PAY_METHODS.map(p => `
+    <div class="pay-method ${state.selectedPay===p.id?'selected':''}" onclick="selectPay('${p.id}')">
+      <div class="pm-icon">${p.icon}</div>
+      <div>
+        <div class="pm-name">${p.name}</div>
+        <div class="pm-desc">${p.desc}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('cardFields').style.display = ['visa','master'].includes(state.selectedPay) ? '' : 'none';
+}
+function selectPay(id) {
+  state.selectedPay = id;
+  renderPayMethods();
+}
+function formatCard(input) {
+  let v = input.value.replace(/\D/g,'').slice(0,16);
+  input.value = v.replace(/(.{4})/g, '$1 ').trim();
+}
+function processPayment() {
+  const btn = event.target.closest('button');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<span style="display:inline-block; animation:spin 1s linear infinite;">◐</span> Processing…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = '✓ Paid · workspace creating';
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.disabled = false;
+      closeModal('checkoutModal');
+      showToast('Payment received — workspace ready');
+      // Auto-create a project for this client
+      const newProj = {
+        id: state.projects.length + 1,
+        name: state.checkoutItem,
+        client: state.user.name,
+        service: state.checkoutItem,
+        lead: 'Tahmid R.',
+        start: new Date().toISOString().slice(0,10),
+        due: new Date(Date.now() + 30*86400000).toISOString().slice(0,10),
+        progress: 5,
+        status: 'active'
+      };
+      state.projects.unshift(newProj);
+      renderProjects();
+      renderAdminProjects();
+      setTimeout(() => goTo('dashboard'), 800);
+    }, 700);
+  }, 1400);
+}
+
+// ========================================================
+// DASHBOARD
+// ========================================================
+function renderProjects() {
+  const list = document.getElementById('projectsList');
+  const userProjects = state.projects.filter(p => !state.user || state.user.role === 'admin' || true).slice(0, 6);
+  list.innerHTML = userProjects.map(p => {
+    const colorClass = p.progress >= 100 ? '' : (p.progress >= 70 ? '' : (p.progress >= 40 ? 'amber' : 'coral'));
+    const statusLabel = { active: 'Active', review: 'In review', done: 'Completed' }[p.status];
+    return `
+    <div class="proj-row">
+      <div class="proj-name">
+        ${p.name}
+        <small>${p.client} · ${p.service}</small>
+      </div>
+      <div class="proj-meta">
+        <strong>${p.lead}</strong>
+        Lead specialist
+      </div>
+      <div class="proj-meta">
+        <strong>${formatDate(p.due)}</strong>
+        Due date
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:6px;">
+          <span>Progress</span><span style="color:var(--text);">${p.progress}%</span>
+        </div>
+        <div class="proj-progress"><div class="proj-progress-fill ${colorClass}" style="width:${p.progress}%"></div></div>
+      </div>
+      <div><span class="proj-status ${p.status}"><span class="dot"></span>${statusLabel}</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('statActive').textContent = state.projects.filter(p => p.status === 'active').length;
+  document.getElementById('statReview').textContent = state.projects.filter(p => p.status === 'review').length;
+  document.getElementById('statDone').textContent = state.projects.filter(p => p.status === 'done').length;
+}
+function formatDate(d) {
+  const dt = new Date(d);
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// ========================================================
+// ADMIN
+// ========================================================
+function renderAdminProjects() {
+  const list = document.getElementById('adminProjectsList');
+  list.innerHTML = state.projects.map(p => {
+    const colorClass = p.progress >= 100 ? '' : (p.progress >= 70 ? '' : (p.progress >= 40 ? 'amber' : 'coral'));
+    const statusLabel = { active: 'Active', review: 'In review', done: 'Completed' }[p.status];
+    return `
+    <div class="proj-row" onclick="editProject(${p.id})" style="cursor:pointer;">
+      <div class="proj-name">${p.name}<small>${p.client} · ${p.service}</small></div>
+      <div class="proj-meta"><strong>${p.lead}</strong>Lead</div>
+      <div class="proj-meta"><strong>${formatDate(p.due)}</strong>Due</div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:6px;">
+          <span>Progress</span><span style="color:var(--text);">${p.progress}%</span>
+        </div>
+        <div class="proj-progress"><div class="proj-progress-fill ${colorClass}" style="width:${p.progress}%"></div></div>
+      </div>
+      <div><span class="proj-status ${p.status}"><span class="dot"></span>${statusLabel}</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('adminStatActive').textContent = state.projects.filter(p => p.status === 'active').length;
+}
+function openAdminAdd() {
+  state.editingProjectId = null;
+  document.getElementById('adminModalTitle').innerHTML = 'Add <span class="it">project.</span>';
+  ['apName','apClient','apLead','apStart','apDue'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('apProgress').value = 0;
+  document.getElementById('apProgressLbl').textContent = '0%';
+  document.getElementById('apStatus').value = 'active';
+  openModal('adminModal');
+}
+function editProject(id) {
+  const p = state.projects.find(x => x.id === id);
+  if (!p) return;
+  state.editingProjectId = id;
+  document.getElementById('adminModalTitle').innerHTML = 'Edit <span class="it">project.</span>';
+  document.getElementById('apName').value = p.name;
+  document.getElementById('apClient').value = p.client;
+  document.getElementById('apLead').value = p.lead;
+  document.getElementById('apStart').value = p.start;
+  document.getElementById('apDue').value = p.due;
+  document.getElementById('apProgress').value = p.progress;
+  document.getElementById('apProgressLbl').textContent = p.progress + '%';
+  document.getElementById('apStatus').value = p.status;
+  document.getElementById('apService').value = p.service;
+  openModal('adminModal');
+}
+function saveProject() {
+  const data = {
+    name:    document.getElementById('apName').value.trim(),
+    client:  document.getElementById('apClient').value.trim(),
+    lead:    document.getElementById('apLead').value.trim(),
+    service: document.getElementById('apService').value,
+    start:   document.getElementById('apStart').value,
+    due:     document.getElementById('apDue').value,
+    progress:parseInt(document.getElementById('apProgress').value),
+    status:  document.getElementById('apStatus').value
+  };
+  if (!data.name || !data.client) return showToast('Project + client name required');
+  if (state.editingProjectId) {
+    const p = state.projects.find(x => x.id === state.editingProjectId);
+    Object.assign(p, data);
+    showToast('Project updated · client dashboard refreshed');
+  } else {
+    state.projects.unshift({ id: Date.now(), ...data });
+    showToast('Project created');
+  }
+  renderProjects();
+  renderAdminProjects();
+  closeModal('adminModal');
+}
+
+// ========================================================
+// CHATBOT
+// ========================================================
+function initChat() {
+  const greeting = [
+    { from: 'bot', text: "Hey 👋 I'm the MBD concierge. I can answer questions about services, pricing, the team, or hand you to a human." },
+    { from: 'bot', text: "What brings you in today?" }
+  ];
+  const body = document.getElementById('chatBody');
+  body.innerHTML = greeting.map(m => `<div class="chat-msg ${m.from}">${m.text}</div>`).join('');
+}
+function openChat() {
+  document.getElementById('chatWindow').classList.add('open');
+  document.getElementById('chatToggle').style.transform = 'scale(0.9)';
+}
+function closeChat() {
+  document.getElementById('chatWindow').classList.remove('open');
+  document.getElementById('chatToggle').style.transform = 'scale(1)';
+}
+function quickReply(text) {
+  document.getElementById('chatInputBox').value = text;
+  sendChatMessage();
+}
+function sendChatMessage() {
+  const input = document.getElementById('chatInputBox');
+  const text = input.value.trim();
+  if (!text) return;
+  appendChatMsg('user', text);
+  input.value = '';
+  setTimeout(() => {
+    const reply = generateChatReply(text);
+    appendChatMsg('bot', reply);
+  }, 600 + Math.random() * 600);
+}
+function appendChatMsg(from, text) {
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + from;
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function generateChatReply(text) {
+  const t = text.toLowerCase();
+  if (t.includes('price') || t.includes('cost') || t.includes('pricing')) {
+    return "Pricing varies by service — sprints start at $1,490, monthly retainers at $4,800, full SaaS builds from $14k. Scroll to the services section for per-service pricing, or tell me what you're trying to build and I'll narrow it down.";
+  }
+  if (t.includes('human') || t.includes('person') || t.includes('talk to') || t.includes('call')) {
+    return "Sure — book a 30-min call with us through the calendar in the contact section, or send a brief and we'll reply inside 11 minutes during working hours.";
+  }
+  if (t.includes('track') || t.includes('project') || t.includes('progress')) {
+    return state.user
+      ? "Your dashboard is right here — every milestone, file and team member, live. Click 'Back to dashboard' from the nav."
+      : "Project tracking is in your client dashboard. Sign in (top right) and you'll see every active project with live progress.";
+  }
+  if (t.includes('team') || t.includes('who') || t.includes('people')) {
+    return "Twenty-two specialists across design, engineering, ML and growth — eight on the core team. Scroll to the 'collective' section to see them. Each project is led by one specialist who stays your point person from kickoff to handover.";
+  }
+  if (t.includes('hi') || t.includes('hello') || t.includes('hey')) {
+    return "Hey! Happy to help. Need pricing, want to track a project, or curious about the team?";
+  }
+  if (t.includes('payment') || t.includes('pay') || t.includes('visa') || t.includes('paypal')) {
+    return "We accept Visa, Mastercard, PayPal and Payoneer. Projects are split into milestones — you only pay each chunk as the work ships. Refunds within 7 days, no questions.";
+  }
+  if (t.includes('time') || t.includes('long') || t.includes('when')) {
+    return "Sprints take 2–3 weeks. Monthly builds run as long as you need. SaaS launches average 6–12 weeks. We share a written timeline before you sign anything.";
+  }
+  if (t.includes('book') || t.includes('appointment') || t.includes('meeting')) {
+    return "Easy — scroll to the contact section, pick a date and slot in the calendar, and you'll get a Google Meet invite within seconds.";
+  }
+  if (t.includes('ml') || t.includes('ai') || t.includes('machine')) {
+    return "Yep, ML is one of our strongest tracks — recommenders, fine-tuned LLMs, vision systems, plus research paper writing for venues like NeurIPS and CVPR. Dr. Anika Faiz leads that practice.";
+  }
+  return "Good question. The fastest answer is probably a 5-minute chat with a human — book a slot in the calendar above, or share a few more details and I'll do my best.";
+}
+
+// ========================================================
+// MODALS
+// ========================================================
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ========================================================
+// TOAST
+// ========================================================
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ========================================================
+// SCROLL REVEAL
+// ========================================================
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => obs.observe(el));
+}
+
+// ========================================================
+// SERVICE CARD HOVER (mouse position for radial highlight)
+// ========================================================
+function initServiceCardHover() {
+  document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.service-card').forEach(card => {
+      const r = card.getBoundingClientRect();
+      if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      }
+    });
+  });
+}
+
+// ========================================================
+// LIVE TIMESTAMP REFRESH (gives a "live" feel)
+// ========================================================
+setInterval(() => {
+  const el = document.getElementById('dashUpdatedTime');
+  if (el && document.getElementById('page-dashboard').style.display !== 'none') {
+    const now = new Date();
+    el.textContent = `Updated · ${now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' })}`;
+  }
+}, 30000);
+
+// Spinner keyframe
+const styleEl = document.createElement('style');
+styleEl.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(styleEl);
+
+// ========================================================
+// GO
+// ========================================================
+boot();
+</script>
+
+</body>
+</html>
